@@ -99,7 +99,7 @@
         <?php
 
         $html_vnex =  file_get_html("https://vnexpress.net/");
-        $top_vnex = $html_vnex->find("h1[class=title-news] a" ,0);
+        $top_vnex = $html_vnex->find("h3[class=title-news] a" ,0);
         $titletop_vnex = $top_vnex->title;
         $linktop_vnex = $top_vnex->href;
         echo "<li class='list-group-item' style='font-size:15px;'> <a href='$linktop_vnex' onclick='doalert(this); return false;'>● ".$titletop_vnex."</a></li>";
@@ -126,14 +126,14 @@
         <li class="list-group-item active">Những tin quan trọng nhất của <a style="color : #fff;" href="http://dantri.com.vn/" target="_blank" > Dân Trí</a></li>
         <?php
         $html_dantri = file_get_html("https://dantri.com.vn/");
-        $list_dantri = $html_dantri->find('div[class=box1 clearfix] ',0)->find('div[data-boxtype=homenewsposition] a',0);
+        $list_dantri = $html_dantri->find('div[class=container clearfix] ',0)->find('div[class=news-item__content] a',0);
         $bigtitle_dantri= $list_dantri->title;
         $biglink_dantri = "https://dantri.com.vn".$list_dantri->href;
          echo "<li class='list-group-item' style='font-size:15px;'> <a href='$biglink_dantri' onclick='doalert(this); return false;'>● ".$bigtitle_dantri."</a></li>";
-        $list = $html_dantri->find('div[class=xnano-content] a' );
+        $list = $html_dantri->find('ul[class=dt-list dt-list--link] h2[class=news-item__title]' );
         foreach ( $list as $item  ) {
             $link_dantri = "https://dantri.com.vn".$item->href;
-            $text_dantri = $item->plaintext;
+            $text_dantri = $item->innertext;
             echo "<li class='list-group-item' style='font-size:15px;'> <a href='$link_dantri' onclick='doalert(this); return false;'>● ".$text_dantri."</a></li>";
         }
         ?>
@@ -161,26 +161,6 @@
         </ul> 
 
        <!--end kẽnh-->
-
-       <!--sao-star-->
-       <ul class="list-group">
-        <li class="list-group-item active">Những tin quan trọng nhất của <a style="color : #fff;" href="https://saostar.vn/" target="_blank" >SaoStar</a></li>
-        <?php
-        $html_saostar =  file_get_html("https://saostar.vn/tin-moi/");
-        $list_saostar = $html_saostar->find("div[class=block list-post first-post-item-no-padding-top last-post-item-no-border-bottom last-post-item-no-padding-bottom] div[class=post-item flexbox pt20 pb20 border-bt]  h3 a");
-        $i=0;
-        foreach ($list_saostar as $menu_saostar) {
-            if($i==12) break;
-            $title_saostar = $menu_saostar->innertext;
-            $link_saostar = $menu_saostar->href;
-            echo "<li class='list-group-item'  style='font-size:15px;'> <a href='$link_saostar' onclick='doalert(this); return false;'>● ".$title_saostar."</a></li>";
-            $i++;
-            
-        }
-        ?>
-        
-        </ul>
-       <!--end saostar-->
        <!--cafebiz-->
        <ul class="list-group">
         <li class="list-group-item active">Những tin quan trọng nhất của <a style="color : #fff;" href="https://cafebiz.vn/" target="_blank" >Cafebiz</a></li>
@@ -204,12 +184,12 @@
         <li class="list-group-item active">Những tin quan trọng nhất của <a style="color : #fff;" href="https://thethao247.vn" target="_blank" >THỂ THAO 24/7</a></li>
         <?php
 
-        $html_thethao =  file_get_html("https://thethao247.vn");
-        $top_thethao = $html_thethao->find("div[class=news_foucs] a",0);
+        $html_thethao =  file_get_html("https://thethao247.vn/the-thao-24h.html");
+        $top_thethao = $html_thethao->find("ul[class=list_news_thumb_bot --style2] li a",0);
         $linktop_thethao = $top_thethao->href;  
         $titletop_thethao = $top_thethao->title; 
         echo "<li class='list-group-item'  style='font-size:15px;'> <a href='$linktop_thethao' onclick='doalert(this); return false;'>● ".$titletop_thethao."</a></li>";
-        $top2_thethao = $html_thethao->find("ul[class=clearfix list_three_news mar_bottom15] h3 a");
+        $top2_thethao = $html_thethao->find("a[class=linknews_thumb_bot]");
         foreach ( $top2_thethao as  $top2_thethao ) {
             $titletop2_thethao = $top2_thethao->title;
             $linktop2_thethao = $top2_thethao->href;
@@ -267,7 +247,7 @@
                                         $html = file_get_html(str_replace("beta.","",$url));
                                         $title = $html->find("meta[name=its_title]", 0)->content;
                                         $img = $html->find("meta[name=twitter:image]",0)->content;
-                                        $time = $html->find("span[class=time left]",0)->innertext;
+                                        $time = $html->find("span[class=date]",0)->innertext;
                                         $des = $html->find("meta[name=twitter:description]",0)->content;
                                         $des1 = $html->find(" p[class=Normal]",0)->innertext;
                                         $title = str_replace('\\','',$title);
@@ -278,7 +258,7 @@
                                         $html = file_get_html(str_replace("beta.","",$url));
                                         $title = $html->find("meta[name=twitter:title]", 0)->content;
                                         $img = $html->find("meta[name=twitter:image]",0)->content;
-                                        $time = $html->find("span[class=fr fon7 mr2 tt-capitalize]",0)->innertext;
+                                        $time = $html->find("span[class=dt-news__time]",0)->innertext;
                                         $des = $html->find("meta[name=twitter:description]",0)->content;
                                         $des1 = $html->find("div[id=divNewsContent] p" ,0)->innertext;
                                         $title = str_replace('\\','',$title);
@@ -293,17 +273,6 @@
                                         $des = $html->find("meta[ property=description]",0)->content;
                                         $des1 = $html->find("div[class=knc-content] p" ,0)->innertext;
                                         //
-                                        $title = str_replace('\\','',$title);
-                                         require "sor.php";
-                                         echo $text;
-                                        break;
-                                    case 'saostar.vn':
-                                        $html = file_get_html($url);
-                                        $title = $html->find("meta[property=og:title]", 0)->content;
-                                        $img = $html->find("meta[property=og:image]",0)->content;
-                                        $time = $html->find("time[class=time-ago ]",0)->datetime;
-                                        $des = $html->find("meta[property=og:description]",0)->content;
-                                        $des1 = $html->find(" div[class=article-body] p",0)->innertext;
                                         $title = str_replace('\\','',$title);
                                          require "sor.php";
                                          echo $text;
@@ -324,7 +293,7 @@
                                         $html = file_get_html($url);
                                         $title = $html->find("meta[property=og:title]", 0)->content;
                                         $img = $html->find("meta[property=og:image]",0)->content;
-                                        $time = $html->find("div[class=date_news ArticleDateTime]",0)->innertext;
+                                        $time = $html->find("p[class=ptimezone fregular]",0)->innertext;
                                         $des = $html->find("meta[property=og:description]",0)->content;
                                         $des1 = $html->find(" div[id=abdf] p",1)->innertext;
                                         $title = str_replace('\\','',$title);
