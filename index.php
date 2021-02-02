@@ -130,7 +130,7 @@
         $bigtitle_dantri= $list_dantri->title;
         $biglink_dantri = "https://dantri.com.vn".$list_dantri->href;
          echo "<li class='list-group-item' style='font-size:15px;'> <a href='$biglink_dantri' onclick='doalert(this); return false;'>● ".$bigtitle_dantri."</a></li>";
-        $list = $html_dantri->find('ul[class=dt-list dt-list--link] h2[class=news-item__title]' );
+        $list = $html_dantri->find('ul[class=dt-list dt-list--link] h2[class=news-item__title] a' );
         foreach ( $list as $item  ) {
             $link_dantri = "https://dantri.com.vn".$item->href;
             $text_dantri = $item->innertext;
