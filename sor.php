@@ -36,7 +36,6 @@ var preview = document.createElement('div') ;
 
     window.scrollTo(0, 0);
     html2canvas(element[0], {
-        width: 705,
         scale: 2,
     allowTaint: true,
     }).then((e)=>{
